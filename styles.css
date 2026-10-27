@@ -188,31 +188,4 @@
     font-size: 10px;
   }
 }
-/* Website creator credit */
-.website-credits {
-  flex: 1 1 100%;
-  width: 100%;
-  text-align: center;
-  padding: 18px 12px;
-  margin-top: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.10);
-  color: #999;
-  font-size: 13px;
-}
 
-.website-credits p {
-  margin: 0 0 5px;
-  line-height: 1.8;
-}
-
-.website-credits strong {
-  color: #fff;
-  font-weight: 600;
-}
-
-.website-credits span {
-  display: block;
-  font-size: 12px;
-  line-height: 1.8;
-  opacity: 0.85;
-}
