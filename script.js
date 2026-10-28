@@ -396,3 +396,65 @@ if (!hasMouse) {
   }, { threshold: 0.12, rootMargin: "0px 0px -5% 0px" });
   targets.forEach(element => observer.observe(element));
 })();
+/* Open product images in a full-screen viewer */
+(function () {
+    let lightbox = document.querySelector(".image-lightbox");
+
+    if (!lightbox) {
+        lightbox = document.createElement("div");
+        lightbox.className = "image-lightbox";
+        lightbox.setAttribute("role", "dialog");
+        lightbox.setAttribute("aria-modal", "true");
+        lightbox.setAttribute("aria-label", "Enlarged product image");
+
+        lightbox.innerHTML = `
+            <button class="image-lightbox-close"
+                    type="button"
+                    aria-label="Close image">&times;</button>
+            <img src="" alt="Enlarged product">
+        `;
+
+        document.body.appendChild(lightbox);
+    }
+
+    const largeImage = lightbox.querySelector("img");
+    const closeButton = lightbox.querySelector(".image-lightbox-close");
+
+    function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        largeImage.src = "";
+        document.body.style.overflow = "";
+    }
+
+    document.addEventListener("click", function (event) {
+        const imageLink = event.target.closest(".product-image");
+
+        if (!imageLink) return;
+
+        const productImage = imageLink.querySelector("img");
+
+        if (!productImage) return;
+
+        event.preventDefault();
+
+        largeImage.src = productImage.currentSrc || productImage.src;
+        largeImage.alt = productImage.alt || "Enlarged product image";
+
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+            closeLightbox();
+        }
+    });
+})();
