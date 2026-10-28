@@ -188,4 +188,40 @@
     font-size: 10px;
   }
 }
+/* Full-size product image viewer */
+.image-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.92);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.image-lightbox.is-open {
+    display: flex;
+}
+
+.image-lightbox img {
+    display: block;
+    max-width: 95%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.image-lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    color: white;
+    background: transparent;
+    border: none;
+    font-size: 38px;
+    cursor: pointer;
+    padding: 5px 12px;
+}
 
