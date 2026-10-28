@@ -567,6 +567,7 @@
   }
 }
 ```css
+```css
 /* NOT JUST ANOTHER RIDE SECTION */
 .ride-showcase {
   display: grid;
@@ -576,9 +577,11 @@
   padding: 70px 5.25%;
   background: #f3f2ef;
   color: #111;
+  box-sizing: border-box;
 }
 
 .ride-showcase-image {
+  width: 100%;
   height: 550px;
   overflow: hidden;
 }
@@ -592,6 +595,7 @@
 }
 
 .ride-showcase-content {
+  min-width: 0;
   max-width: 560px;
 }
 
@@ -655,4 +659,3 @@
   }
 }
 ```
-
