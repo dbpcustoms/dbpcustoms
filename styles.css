@@ -224,4 +224,346 @@
     cursor: pointer;
     padding: 5px 12px;
 }
+/* =========================================
+   DBP CUSTOMS ABOUT SHOWCASE
+   White background / Black typography
+========================================= */
+
+.about-showcase {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 70px 6% 65px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+  background: #ffffff;
+  color: #080808;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* LEFT CONTENT */
+
+.about-showcase-content {
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.about-showcase-kicker {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.about-showcase-kicker span {
+  display: block;
+  width: 38px;
+  height: 2px;
+  background: #111111;
+}
+
+.about-showcase-kicker p {
+  margin: 0;
+  color: #777777;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+/* MAIN HEADING */
+
+.about-showcase-content h2 {
+  max-width: 720px;
+  margin: 0 0 25px;
+  color: #080808;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(42px, 4.2vw, 66px);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -1.5px;
+}
+
+/* DESCRIPTION */
+
+.about-showcase-description {
+  max-width: 540px;
+  margin: 0 0 28px;
+  color: #444444;
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  line-height: 1.95;
+}
+
+/* BUTTON */
+
+.about-showcase-button {
+  min-height: 54px;
+  padding: 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: #080808;
+  color: #ffffff;
+  border: 1px solid #080808;
+  text-decoration: none;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.about-showcase-button span {
+  font-size: 18px;
+}
+
+.about-showcase-button:hover {
+  background: #ffffff;
+  color: #080808;
+}
+
+/* THREE FEATURES */
+
+.about-showcase-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 55px;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 25px;
+}
+
+.about-showcase-feature {
+  min-width: 0;
+  padding: 0 17px;
+  border-right: 1px solid #d6d6d6;
+}
+
+.about-showcase-feature:first-child {
+  padding-left: 0;
+}
+
+.about-showcase-feature:last-child {
+  padding-right: 0;
+  border-right: none;
+}
+
+.about-feature-icon {
+  min-height: 40px;
+  margin-bottom: 10px;
+  color: #080808;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.about-showcase-feature h3 {
+  margin: 0 0 8px;
+  color: #080808;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.about-showcase-feature p {
+  margin: 0;
+  color: #555555;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* RIGHT-SIDE IMAGE */
+
+.about-showcase-visual {
+  position: relative;
+  min-width: 0;
+  height: 580px;
+  background: #eeeeee;
+  overflow: hidden;
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.about-showcase-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.about-showcase-visual:hover img {
+  transform: scale(1.035);
+}
+
+/* TEXT OVER THE IMAGE */
+
+.about-showcase-image-label {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 15px;
+  background: rgba(0, 0, 0, 0.68);
+  color: #ffffff;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+.about-showcase-image-label span {
+  width: 28px;
+  height: 1px;
+  margin-top: 9px;
+  flex-shrink: 0;
+  background: #ffffff;
+}
+
+/* TABLET */
+
+@media (max-width: 1000px) {
+  .about-showcase {
+    padding: 55px 5%;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 25px;
+  }
+
+  .about-showcase-content h2 {
+    font-size: clamp(38px, 5vw, 54px);
+  }
+
+  .about-showcase-description {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .about-showcase-visual {
+    height: 500px;
+  }
+
+  .about-showcase-features {
+    margin-top: 38px;
+  }
+
+  .about-showcase-feature {
+    padding: 0 10px;
+  }
+
+  .about-showcase-feature h3 {
+    font-size: 10px;
+  }
+
+  .about-showcase-feature p {
+    font-size: 11px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .about-showcase {
+    padding: 45px 6% 40px;
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .about-showcase-kicker {
+    margin-bottom: 20px;
+  }
+
+  .about-showcase-content h2 {
+    font-size: clamp(40px, 10vw, 58px);
+    letter-spacing: -0.8px;
+    line-height: 1;
+  }
+
+  .about-showcase-description {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .about-showcase-button {
+    width: auto;
+    max-width: 100%;
+    min-height: 50px;
+    padding: 0 18px;
+    gap: 14px;
+    font-size: 11px;
+  }
+
+  .about-showcase-features {
+    margin-top: 38px;
+    padding-top: 22px;
+  }
+
+  .about-showcase-feature {
+    padding: 0 9px;
+  }
+
+  .about-feature-icon {
+    font-size: 25px;
+    min-height: 33px;
+  }
+
+  .about-showcase-feature h3 {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .about-showcase-feature p {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .about-showcase-visual {
+    height: 390px;
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .about-showcase-image-label {
+    top: 14px;
+    right: 12px;
+    font-size: 10px;
+  }
+}
+
+/* SMALL MOBILE PHONES */
+
+@media (max-width: 380px) {
+  .about-showcase-features {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about-showcase-feature,
+  .about-showcase-feature:first-child,
+  .about-showcase-feature:last-child {
+    padding: 0;
+    border-right: none;
+  }
+
+  .about-showcase-feature {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  .about-showcase-feature:last-child {
+    border-bottom: none;
+  }
+
+  .about-showcase-visual {
+    height: 300px;
+  }
+}
 
