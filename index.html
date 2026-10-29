@@ -93,18 +93,208 @@
 
     </div>
 
-    <div class="about-hero-visual">
-    <video
-        class="about-hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-    >
-        <source src="dbp-customs-reveal.mp4" type="video/mp4">
-    </video>
+   
+<div class="dbp-customizer" id="dbpCustomizer">
+
+    <div class="dbp-garage-top">
+        <span class="dbp-garage-label">
+            <span class="dbp-live-dot"></span>
+            DBP DIGITAL GARAGE
+        </span>
+        <span class="dbp-garage-number">CUSTOMIZE / 001</span>
+    </div>
+
+    <div class="dbp-garage-scene" id="dbpGarageScene">
+
+        <div class="dbp-garage-light dbp-light-left"></div>
+        <div class="dbp-garage-light dbp-light-right"></div>
+
+        <div class="dbp-garage-floor"></div>
+        <div class="dbp-car-underglow" id="dbpUnderglow"></div>
+
+        <svg class="dbp-car-svg" id="dbpCarSvg"
+             viewBox="0 0 520 240"
+             role="img"
+             aria-label="Stylized car that changes colour and wheel style">
+
+            <defs>
+                <linearGradient id="dbpBodyGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity=".42"/>
+                    <stop offset="35%" stop-color="var(--dbp-car-color)"/>
+                    <stop offset="100%" stop-color="#111111"/>
+                </linearGradient>
+
+                <linearGradient id="dbpWindowGradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#8295a1"/>
+                    <stop offset="45%" stop-color="#17232b"/>
+                    <stop offset="100%" stop-color="#050708"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Car shadow -->
+            <ellipse cx="260" cy="194" rx="205" ry="18" fill="#000" opacity=".65"/>
+
+            <!-- Main car body -->
+            <path class="dbp-car-body"
+                  d="M52 158 L65 126 Q72 113 99 108 L151 97
+                     L195 52 Q205 39 225 38 L321 38
+                     Q342 39 355 57 L391 105 L441 116
+                     Q458 121 465 139 L470 165
+                     L455 177 L65 177 L48 168 Z"
+                  fill="url(#dbpBodyGradient)"
+                  stroke="var(--dbp-car-color)"
+                  stroke-width="2.5"/>
+
+            <!-- Windows -->
+            <path d="M163 98 L205 57 Q211 49 226 49 L263 49 L263 98 Z"
+                  fill="url(#dbpWindowGradient)"
+                  stroke="#9ba6ab" stroke-opacity=".45" stroke-width="2"/>
+
+            <path d="M274 49 L318 49 Q331 50 341 65 L366 98 L274 98 Z"
+                  fill="url(#dbpWindowGradient)"
+                  stroke="#9ba6ab" stroke-opacity=".45" stroke-width="2"/>
+
+            <!-- Window divider -->
+            <path d="M269 45 L269 103" stroke="#1b1b1b" stroke-width="6"/>
+
+            <!-- Door details -->
+            <path d="M158 108 L145 165 M274 107 L278 165 M380 111 L397 164"
+                  fill="none" stroke="#111" stroke-width="2" opacity=".8"/>
+
+            <path d="M182 120 L208 120 M299 120 L326 120"
+                  stroke="#eee" stroke-opacity=".5" stroke-width="2"/>
+
+            <!-- Front and rear lights -->
+            <path d="M60 132 L89 126 L83 140 L57 145 Z"
+                  fill="#e9f5ff" stroke="#fff" stroke-width="1.5"/>
+
+            <path d="M437 132 L458 139 L461 151 L436 146 Z"
+                  fill="#ff334b" stroke="#ff5366" stroke-width="1.5"/>
+
+            <!-- Front grille -->
+            <path d="M58 148 L84 148 L80 162 L57 161 Z" fill="#080909"/>
+            <path d="M62 152 L79 152 M61 157 L78 157"
+                  stroke="#666" stroke-width="2"/>
+
+            <!-- Side skirt -->
+            <path d="M104 175 L407 175 L393 183 L115 183 Z" fill="#090a0b"/>
+
+            <!-- Wheels -->
+            <g class="dbp-wheel dbp-wheel-rear" transform="translate(143 169)">
+                <circle class="dbp-wheel-outer" r="33" fill="#070808" stroke="#6b6b6b" stroke-width="3"/>
+                <circle class="dbp-wheel-inner" r="24" fill="#202326" stroke="#b8b8b8" stroke-width="2"/>
+                <g class="dbp-wheel-spokes">
+                    <path d="M0 -21 L0 -5 M0 5 L0 21 M-21 0 L-5 0 M5 0 L21 0
+                             M-15 -15 L-4 -4 M4 4 L15 15 M15 -15 L4 -4 M-4 4 L-15 15"
+                          stroke="#e1e1e1" stroke-width="4"/>
+                </g>
+                <circle r="6" fill="#a8a8a8"/>
+            </g>
+
+            <g class="dbp-wheel dbp-wheel-front" transform="translate(389 169)">
+                <circle class="dbp-wheel-outer" r="33" fill="#070808" stroke="#6b6b6b" stroke-width="3"/>
+                <circle class="dbp-wheel-inner" r="24" fill="#202326" stroke="#b8b8b8" stroke-width="2"/>
+                <g class="dbp-wheel-spokes">
+                    <path d="M0 -21 L0 -5 M0 5 L0 21 M-21 0 L-5 0 M5 0 L21 0
+                             M-15 -15 L-4 -4 M4 4 L15 15 M15 -15 L4 -4 M-4 4 L-15 15"
+                          stroke="#e1e1e1" stroke-width="4"/>
+                </g>
+                <circle r="6" fill="#a8a8a8"/>
+            </g>
+
+            <!-- Number plate -->
+            <rect x="80" y="150" width="49" height="17" rx="2"
+                  fill="#f1f1e8" stroke="#111" stroke-width="1.5"/>
+            <text id="dbpSvgPlate" x="104.5" y="162"
+                  text-anchor="middle" font-family="Arial, sans-serif"
+                  font-size="10" font-weight="900" fill="#111">0575</text>
+
+            <!-- Highlight -->
+            <path d="M103 113 L151 103 L194 59"
+                  fill="none" stroke="#fff" stroke-opacity=".4"
+                  stroke-width="2" stroke-linecap="round"/>
+
+        </svg>
+
+        <div class="dbp-scene-caption">
+            <span>YOUR BUILD. YOUR RULES.</span>
+            <span id="dbpSceneStatus">LIGHTS READY</span>
+        </div>
+
+    </div>
+
+    <div class="dbp-customizer-controls">
+
+        <div class="dbp-control-group">
+            <span class="dbp-control-label">01 / PAINT</span>
+            <div class="dbp-paint-options">
+                <button class="dbp-paint active" data-color="#c7c7c7"
+                        style="--swatch:#c7c7c7" aria-label="Silver paint"
+                        aria-pressed="true"></button>
+                <button class="dbp-paint" data-color="#e8e8e8"
+                        style="--swatch:#e8e8e8" aria-label="White paint"
+                        aria-pressed="false"></button>
+                <button class="dbp-paint" data-color="#c91f35"
+                        style="--swatch:#c91f35" aria-label="Red paint"
+                        aria-pressed="false"></button>
+                <button class="dbp-paint" data-color="#1748bb"
+                        style="--swatch:#1748bb" aria-label="Blue paint"
+                        aria-pressed="false"></button>
+                <button class="dbp-paint" data-color="#17191b"
+                        style="--swatch:#17191b" aria-label="Black paint"
+                        aria-pressed="false"></button>
+                <button class="dbp-paint" data-color="#19835a"
+                        style="--swatch:#19835a" aria-label="Green paint"
+                        aria-pressed="false"></button>
+            </div>
+        </div>
+
+        <div class="dbp-control-group">
+            <span class="dbp-control-label">02 / WHEELS</span>
+            <div class="dbp-wheel-options">
+                <button class="dbp-option active" data-wheel="sport"
+                        aria-pressed="true">SPORT</button>
+                <button class="dbp-option" data-wheel="multi"
+                        aria-pressed="false">MULTI-SPOKE</button>
+                <button class="dbp-option" data-wheel="dark"
+                        aria-pressed="false">DARK</button>
+            </div>
+        </div>
+
+        <div class="dbp-control-group dbp-plate-group">
+            <label class="dbp-control-label" for="dbpPlateInput">03 / YOUR NUMBER PLATE</label>
+            <input id="dbpPlateInput" type="text" maxlength="10"
+                   value="DBP 0575" placeholder="Enter your plate"
+                   autocomplete="off">
+        </div>
+
+        <div class="dbp-toggle-row">
+            <button class="dbp-toggle" id="dbpGlowToggle"
+                    type="button" aria-pressed="false">
+                <span class="dbp-toggle-indicator"></span>
+                NEON UNDERGLOW
+            </button>
+
+            <button class="dbp-toggle" id="dbpLightsToggle"
+                    type="button" aria-pressed="false">
+                <span class="dbp-toggle-indicator"></span>
+                GARAGE LIGHTS
+            </button>
+        </div>
+
+        <button class="dbp-reset-button" id="dbpReset" type="button">
+            ↺ RESET YOUR BUILD
+        </button>
+
+    </div>
+
+    <div class="dbp-garage-footer">
+        <span>DBP CUSTOMS</span>
+        <span>MADE FOR CAR CULTURE <b>✳</b></span>
+    </div>
+
 </div>
+
 
 </section>
 <!-- END DBP CUSTOMS ABOUT SECTION -->
