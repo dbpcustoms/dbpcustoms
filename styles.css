@@ -666,3 +666,66 @@
     font-size: clamp(42px, 10vw, 60px);
   }
 }
+/* FINAL FIX - NOT JUST ANOTHER RIDE */
+
+.ride-showcase {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) !important;
+  align-items: center !important;
+  gap: 5% !important;
+  padding: 60px 5.25% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.ride-showcase-image {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1.23 / 1 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.ride-showcase-image img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+.ride-showcase-content {
+  width: 100% !important;
+  max-width: 560px !important;
+  min-width: 0 !important;
+}
+
+.ride-showcase-content h2 {
+  font-size: clamp(58px, 5.5vw, 84px) !important;
+  line-height: 0.92 !important;
+  margin: 28px 0 !important;
+  letter-spacing: -1px !important;
+}
+
+.ride-showcase-content > p {
+  max-width: 420px !important;
+  font-size: 13px !important;
+  line-height: 1.9 !important;
+}
+
+@media (max-width: 700px) {
+  .ride-showcase {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 28px !important;
+    padding: 40px 5% !important;
+  }
+
+  .ride-showcase-image {
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  .ride-showcase-content h2 {
+    font-size: clamp(42px, 10vw, 60px) !important;
+  }
+}
