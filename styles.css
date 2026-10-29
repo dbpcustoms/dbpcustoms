@@ -822,3 +822,455 @@
     margin-bottom: 15px !important;
 }
 
+/* =========================================
+   DBP CUSTOMS — INTERACTIVE CAR CUSTOMIZER
+   ========================================= */
+
+.dbp-customizer {
+    --dbp-car-color: #c7c7c7;
+    --dbp-neon-color: #e51f38;
+    width: 100%;
+    max-width: 520px;
+    min-width: 0;
+    justify-self: start;
+    overflow: hidden;
+    color: #f4f4f4;
+    background: #0b0c0d;
+    border: 1px solid #292a2c;
+    font-family: 'DM Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+.dbp-customizer *,
+.dbp-customizer *::before,
+.dbp-customizer *::after {
+    box-sizing: border-box;
+}
+
+.dbp-garage-top,
+.dbp-garage-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+.dbp-garage-top {
+    border-bottom: 1px solid #242527;
+}
+
+.dbp-garage-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dbp-live-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #e51f38;
+    box-shadow: 0 0 10px #e51f38;
+    animation: dbpDotPulse 1.8s infinite;
+}
+
+.dbp-garage-number,
+.dbp-garage-footer {
+    color: #858589;
+}
+
+.dbp-garage-scene {
+    --dbp-scene-glow: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1.22 / 1;
+    min-height: 250px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        radial-gradient(ellipse at 50% 73%, #27292c 0%, #121315 38%, #080909 76%);
+    transition: background 0.6s ease;
+}
+
+.dbp-garage-scene.dbp-lights-on {
+    background:
+        radial-gradient(ellipse at 50% 55%, #393b3e 0%, #191a1d 45%, #080909 85%);
+}
+
+.dbp-garage-light {
+    position: absolute;
+    top: -20%;
+    width: 24%;
+    height: 75%;
+    z-index: -1;
+    opacity: 0.12;
+    filter: blur(24px);
+    background: #fff;
+    transform: rotate(25deg);
+    transition: opacity 0.6s ease;
+}
+
+.dbp-light-left {
+    left: 8%;
+}
+
+.dbp-light-right {
+    right: 8%;
+    transform: rotate(-25deg);
+}
+
+.dbp-lights-on .dbp-garage-light {
+    opacity: 0.65;
+}
+
+.dbp-garage-floor {
+    position: absolute;
+    left: -20%;
+    right: -20%;
+    bottom: 10%;
+    height: 28%;
+    z-index: -1;
+    opacity: 0.35;
+    transform: perspective(180px) rotateX(35deg);
+    transform-origin: bottom;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 48px,
+        #414246 49px,
+        transparent 50px
+    );
+    border-top: 1px solid #393a3c;
+}
+
+.dbp-car-svg {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    padding: 8px;
+    transform: translateY(5px);
+    filter: drop-shadow(0 12px 15px #0009);
+    animation: dbpCarIdle 3.5s ease-in-out infinite;
+}
+
+.dbp-car-body {
+    transition: fill 0.4s ease, stroke 0.4s ease;
+}
+
+.dbp-wheel {
+    transform-box: view-box;
+    transform-origin: center;
+}
+
+.dbp-wheel-spokes {
+    transform-origin: 0 0;
+    transition: transform 0.5s ease;
+}
+
+.dbp-wheel-inner,
+.dbp-wheel-outer {
+    transition: fill 0.35s ease, stroke 0.35s ease;
+}
+
+/* Wheel style choices */
+
+.dbp-customizer[data-wheel="multi"] .dbp-wheel-spokes {
+    transform: rotate(22.5deg) scale(1.15);
+}
+
+.dbp-customizer[data-wheel="multi"] .dbp-wheel-spokes path {
+    stroke-width: 2;
+}
+
+.dbp-customizer[data-wheel="dark"] .dbp-wheel-inner {
+    fill: #090a0b;
+    stroke: #555;
+}
+
+.dbp-customizer[data-wheel="dark"] .dbp-wheel-outer {
+    stroke: #303236;
+}
+
+.dbp-customizer[data-wheel="dark"] .dbp-wheel-spokes path {
+    stroke: #56585d;
+}
+
+.dbp-customizer[data-wheel="dark"] .dbp-wheel-spokes {
+    transform: rotate(45deg);
+}
+
+.dbp-car-underglow {
+    position: absolute;
+    z-index: 1;
+    left: 22%;
+    right: 22%;
+    bottom: 20%;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--dbp-neon-color);
+    opacity: 0;
+    filter: blur(17px);
+    transform: scaleX(0.8);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.dbp-customizer.dbp-glow-on .dbp-car-underglow {
+    opacity: 1;
+    transform: scaleX(1.2);
+    animation: dbpGlowPulse 1.8s ease-in-out infinite;
+}
+
+.dbp-scene-caption {
+    position: absolute;
+    z-index: 3;
+    left: 15px;
+    right: 15px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    color: #999a9d;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#dbpSceneStatus {
+    color: var(--dbp-car-color);
+    text-align: right;
+}
+
+.dbp-customizer-controls {
+    padding: 17px 16px 16px;
+    border-top: 1px solid #292a2c;
+    background: #101112;
+}
+
+.dbp-control-group {
+    margin-bottom: 17px;
+}
+
+.dbp-control-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #929397;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.dbp-paint-options,
+.dbp-wheel-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+}
+
+.dbp-paint {
+    position: relative;
+    width: 27px;
+    height: 27px;
+    padding: 0;
+    border: 2px solid #3b3c3e;
+    border-radius: 50%;
+    background: var(--swatch);
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.dbp-paint:hover {
+    transform: scale(1.08);
+}
+
+.dbp-paint.active {
+    border-color: #fff;
+    box-shadow: 0 0 0 2px #101112, 0 0 0 3px #fff;
+}
+
+.dbp-option {
+    min-height: 32px;
+    padding: 8px 11px;
+    border: 1px solid #353638;
+    background: #18191b;
+    color: #b7b7b9;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dbp-option.active,
+.dbp-option:hover {
+    color: #fff;
+    border-color: #e51f38;
+    background: #291216;
+}
+
+.dbp-plate-group input {
+    width: 100%;
+    min-height: 40px;
+    padding: 10px 12px;
+    border: 1px solid #36373a;
+    border-radius: 0;
+    outline: none;
+    background: #080909;
+    color: #fff;
+    font: 600 13px 'DM Sans', sans-serif;
+    letter-spacing: 1px;
+}
+
+.dbp-plate-group input:focus {
+    border-color: #e51f38;
+}
+
+.dbp-plate-group input::placeholder {
+    color: #6f7073;
+}
+
+.dbp-toggle-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.dbp-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 39px;
+    padding: 8px 5px;
+    border: 1px solid #353638;
+    background: #171819;
+    color: #c9c9cb;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.dbp-toggle-indicator {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+    border-radius: 50%;
+    background: #5a5b5e;
+}
+
+.dbp-toggle[aria-pressed="true"] {
+    border-color: #e51f38;
+    color: #fff;
+    background: #251115;
+}
+
+.dbp-toggle[aria-pressed="true"] .dbp-toggle-indicator {
+    background: #e51f38;
+    box-shadow: 0 0 8px #e51f38;
+}
+
+.dbp-reset-button {
+    width: 100%;
+    min-height: 39px;
+    padding: 10px;
+    border: 1px solid #414245;
+    background: transparent;
+    color: #f2f2f2;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.dbp-reset-button:hover {
+    border-color: #e51f38;
+    background: #251115;
+}
+
+.dbp-garage-footer {
+    border-top: 1px solid #292a2c;
+    font-size: 8px;
+}
+
+.dbp-garage-footer b {
+    color: #e51f38;
+}
+
+@keyframes dbpCarIdle {
+    0%, 100% { transform: translateY(5px); }
+    50% { transform: translateY(0); }
+}
+
+@keyframes dbpDotPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+}
+
+@keyframes dbpGlowPulse {
+    0%, 100% { opacity: 0.65; }
+    50% { opacity: 1; }
+}
+
+/* Keep the customizer fitted inside the About section */
+
+.about-hero-visual:has(.dbp-customizer) {
+    width: 100% !important;
+    max-width: 520px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    clip-path: none !important;
+    background: transparent !important;
+}
+
+@media (max-width: 768px) {
+    .dbp-customizer {
+        max-width: 100%;
+    }
+
+    .dbp-garage-scene {
+        min-height: 220px;
+    }
+
+    .dbp-customizer-controls {
+        padding: 15px 12px;
+    }
+
+    .dbp-garage-top,
+    .dbp-garage-footer {
+        padding: 12px;
+        font-size: 8px;
+    }
+
+    .dbp-toggle {
+        font-size: 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dbp-car-svg,
+    .dbp-live-dot,
+    .dbp-customizer.dbp-glow-on .dbp-car-underglow {
+        animation: none;
+    }
+}
+
+
