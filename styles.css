@@ -571,38 +571,50 @@
 /* NOT JUST ANOTHER RIDE SECTION */
 
 .ride-showcase {
-  display: grid;
-  grid-template-columns: 1fr 0.9fr;
-  align-items: center;
-  gap: 8%;
-  padding: 70px 5.25%;
+  display: grid !important;
+  grid-template-columns: 1.05fr 0.95fr !important;
+  align-items: center !important;
+  gap: 8% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 70px 5.25% !important;
   background: #f3f2ef;
   color: #111;
 }
 
 .ride-showcase-image {
-  width: 100%;
-  height: 550px;
+  width: 100% !important;
+  height:  min(42vw, 560px) !important;
+  min-height: 400px !important;
   overflow: hidden;
-  background: #e5e4e0;
 }
 
 .ride-showcase-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
 }
 
 .ride-showcase-content {
-  min-width: 0;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 560px;
+}
+
+.ride-showcase-content .section-kicker {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #6c6c6c;
+  font-weight: 700;
 }
 
 .ride-showcase-content h2 {
   margin: 32px 0 28px;
   font-family: var(--display);
-  font-size: clamp(48px, 6.5vw, 90px);
+  font-size: clamp(44px, 4.5vw, 72px);
   font-weight: 800;
   line-height: 0.92;
   letter-spacing: -1px;
@@ -615,7 +627,7 @@
 
 .ride-showcase-content > p {
   max-width: 420px;
-  margin-bottom: 35px;
+  margin: 0 0 35px;
   color: #666;
   font-size: 13px;
   line-height: 1.9;
@@ -638,24 +650,21 @@
   font-size: 18px;
 }
 
-@media (max-width: 800px) {
+/* MOBILE LAYOUT */
+
+@media (max-width: 700px) {
   .ride-showcase {
-    grid-template-columns: 1fr;
-    gap: 35px;
-    padding: 50px 5%;
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+    padding: 40px 5% !important;
   }
 
   .ride-showcase-image {
-    height: 380px;
+    height: 350px !important;
+    min-height: 0 !important;
   }
 
   .ride-showcase-content h2 {
-    font-size: clamp(48px, 12vw, 72px);
-  }
-}
-
-@media (max-width: 420px) {
-  .ride-showcase-image {
-    height: 300px;
+    font-size: clamp(42px, 10vw, 60px);
   }
 }
