@@ -759,12 +759,43 @@
     background: #111 !important;
 }
 
+/* ABOUT SECTION VIDEO */
 .about-hero-video {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
+    background: #111;
+}
+
+/* VIDEO CONTAINER — DESKTOP */
+.about-hero-visual {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    height: 400px !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    justify-self: start !important;
+    clip-path: none !important;
+    background: #111 !important;
+}
+
+/* VIDEO CONTAINER — MOBILE */
+@media (max-width: 768px) {
+    .about-hero-visual {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+    }
+
+    .about-hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 .about-hero-visual {
