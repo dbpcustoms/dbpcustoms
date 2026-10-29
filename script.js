@@ -764,3 +764,117 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("DBP cinematic upgrade initialized.");
 });
 
+/* =====================================
+   DBP CUSTOMS — SHOWCASE + CONFIGURATOR
+===================================== */
+
+(() => {
+  function initDBPConfiguratorPage() {
+    const customizer = document.getElementById("dbpCustomizer");
+    const scene = document.getElementById("dbpGarageScene");
+
+    if (!customizer || !scene) return;
+    if (document.getElementById("dbpConfigOverlay")) return;
+
+    const originalParent = customizer.parentElement;
+    if (!originalParent) return;
+
+    // Compact teaser displayed on the main website
+    const teaser = document.createElement("section");
+    teaser.className = "dbp-mini-showcase";
+    teaser.innerHTML = `
+      <div class="dbp-mini-copy">
+        <p class="dbp-mini-kicker">DBP CUSTOMS / YOUR BUILD</p>
+        <h3>MAKE IT<br>YOUR OWN.</h3>
+        <p class="dbp-mini-description">
+          Your colour. Your wheels. Your signature.
+        </p>
+        <button class="dbp-customize-open" type="button">
+          CUSTOMIZE YOUR CAR <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+      <div class="dbp-mini-car" aria-hidden="true"></div>
+    `;
+
+    // Reuse the existing SVG car for the small animated preview
+    const carSVG = customizer.querySelector(".dbp-car-svg");
+    const preview = teaser.querySelector(".dbp-mini-car");
+
+    if (carSVG && preview) {
+      const clone = carSVG.cloneNode(true);
+      clone.removeAttribute("id");
+      clone.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
+      preview.appendChild(clone);
+    }
+
+    // Full-screen overlay with a visible website behind it
+    const overlay = document.createElement("div");
+    overlay.className = "dbp-config-overlay";
+    overlay.id = "dbpConfigOverlay";
+    overlay.setAttribute("aria-hidden", "true");
+
+    overlay.innerHTML = `
+      <div class="dbp-config-window" role="dialog"
+           aria-modal="true" aria-label="Customize your car">
+        <header class="dbp-config-header">
+          <p class="dbp-config-brand">DBP <span>CUSTOMS</span> / CONFIGURATOR</p>
+          <button class="dbp-config-close" type="button"
+                  aria-label="Close customizer">×</button>
+        </header>
+        <div class="dbp-config-content"></div>
+      </div>
+    `;
+
+    const content = overlay.querySelector(".dbp-config-content");
+    const openButton = teaser.querySelector(".dbp-customize-open");
+    const closeButton = overlay.querySelector(".dbp-config-close");
+
+    // Put the real customizer in the overlay without cloning its controls
+    content.appendChild(customizer);
+
+    // Insert the compact preview where the original customizer was
+    originalParent.insertBefore(teaser, originalParent.firstChild);
+    document.body.appendChild(overlay);
+
+    let previousFocus = null;
+
+    function openConfigurator() {
+      previousFocus = document.activeElement;
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeButton.focus();
+    }
+
+    function closeConfigurator() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+
+      if (previousFocus) previousFocus.focus();
+    }
+
+    openButton.addEventListener("click", openConfigurator);
+    closeButton.addEventListener("click", closeConfigurator);
+
+    // Clicking the dark background closes the overlay
+    overlay.addEventListener("click", event => {
+      if (event.target === overlay) closeConfigurator();
+    });
+
+    // Escape key closes it
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && overlay.classList.contains("is-open")) {
+        closeConfigurator();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDBPConfiguratorPage);
+  } else {
+    initDBPConfiguratorPage();
+  }
+})();
+
+
