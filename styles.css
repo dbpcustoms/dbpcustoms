@@ -1768,6 +1768,301 @@
   }
 }
 
+/* =====================================
+   DBP CUSTOMS — COMPACT CAR SHOWCASE
+===================================== */
+
+.dbp-mini-showcase {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 20px 26px;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 70% 50%, #342025 0%, transparent 48%),
+    linear-gradient(120deg, #111 0%, #080808 100%);
+  border: 1px solid #292929;
+}
+
+.dbp-mini-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.dbp-mini-kicker {
+  margin: 0 0 8px;
+  color: #e51f38;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.dbp-mini-showcase h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(22px, 3vw, 36px);
+  line-height: 1.05;
+  letter-spacing: -1px;
+}
+
+.dbp-mini-showcase p.dbp-mini-description {
+  margin: 9px 0 14px;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.dbp-customize-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 42px;
+  padding: 0 17px;
+  border: 0;
+  background: #e51f38;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+
+.dbp-customize-open:hover {
+  background: #ff304b;
+  transform: translateY(-2px);
+}
+
+.dbp-mini-car {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(42vw, 410px);
+  min-width: 190px;
+}
+
+.dbp-mini-car::after {
+  content: "";
+  position: absolute;
+  bottom: 7%;
+  left: 12%;
+  width: 76%;
+  height: 12%;
+  border-radius: 50%;
+  background: #e51f38;
+  filter: blur(23px);
+  opacity: .45;
+  animation: dbpMiniGlow 3s ease-in-out infinite;
+}
+
+.dbp-mini-car svg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  animation: dbpMiniDrive 4s ease-in-out infinite;
+  filter: drop-shadow(0 12px 15px #000);
+}
+
+@keyframes dbpMiniDrive {
+  0%, 100% { transform: translateX(0) translateY(2px); }
+  25% { transform: translateX(-7px) translateY(-3px); }
+  50% { transform: translateX(0) translateY(1px); }
+  75% { transform: translateX(7px) translateY(-2px); }
+}
+
+@keyframes dbpMiniGlow {
+  0%, 100% { opacity: .25; transform: scaleX(.85); }
+  50% { opacity: .7; transform: scaleX(1.05); }
+}
+
+/* =====================================
+   FULL-SCREEN CUSTOMIZER OVERLAY
+===================================== */
+
+.dbp-config-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, .78);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+
+.dbp-config-overlay.is-open {
+  display: flex;
+}
+
+.dbp-config-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(1050px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  background: #0c0d0f;
+  border: 1px solid #383838;
+  box-shadow: 0 25px 100px #000b;
+  animation: dbpConfigEnter .3s ease-out;
+}
+
+@keyframes dbpConfigEnter {
+  from { opacity: 0; transform: translateY(14px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.dbp-config-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #101113;
+  border-bottom: 1px solid #292929;
+}
+
+.dbp-config-brand {
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.dbp-config-brand span {
+  color: #e51f38;
+}
+
+.dbp-config-close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid #454545;
+  background: #191a1c;
+  color: #fff;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.dbp-config-close:hover {
+  background: #e51f38;
+  border-color: #e51f38;
+}
+
+.dbp-config-content {
+  padding: 14px;
+}
+
+/* Make the existing customizer compact inside the overlay */
+.dbp-config-content .dbp-customizer {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.dbp-config-content .dbp-garage-scene {
+  min-height: 0;
+  aspect-ratio: 1.7 / 1;
+}
+
+.dbp-config-content .dbp-car-svg {
+  max-height: 390px;
+}
+
+.dbp-config-content .dbp-customizer-controls {
+  padding: 14px;
+}
+
+.dbp-config-content .dbp-control-group {
+  margin-bottom: 12px;
+}
+
+/* Keep the progress/stats panel compact if already added */
+.dbp-config-content .dbp-live-stats {
+  margin-bottom: 12px;
+  padding: 10px;
+}
+
+.dbp-config-content .dbp-stats-grid {
+  margin: 8px 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dbp-mini-showcase {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 18px;
+  }
+
+  .dbp-mini-car {
+    grid-row: 1;
+    justify-self: center;
+    width: 100%;
+    max-width: 330px;
+    min-width: 0;
+    margin: -5px 0 0;
+  }
+
+  .dbp-mini-copy {
+    grid-row: 2;
+  }
+
+  .dbp-config-overlay {
+    padding: 7px;
+  }
+
+  .dbp-config-window {
+    max-height: 96vh;
+  }
+
+  .dbp-config-header {
+    padding: 10px 12px;
+  }
+
+  .dbp-config-content {
+    padding: 7px;
+  }
+
+  .dbp-config-content .dbp-garage-scene {
+    aspect-ratio: 1.25 / 1;
+  }
+
+  .dbp-config-content .dbp-customizer-controls {
+    padding: 10px 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dbp-mini-car svg,
+  .dbp-mini-car::after {
+    animation: none;
+  }
+
+  .dbp-config-window {
+    animation: none;
+  }
+}
+
 
 
 
