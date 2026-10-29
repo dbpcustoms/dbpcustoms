@@ -566,25 +566,25 @@
     height: 300px;
   }
 }
-/* NOT JUST ANOTHER RIDE SECTION */
+/* NOT JUST ANOTHER RIDE — FINAL LAYOUT */
 
 .ride-showcase {
   display: grid !important;
-  grid-template-columns: 1.05fr 0.95fr !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
   align-items: center !important;
-  gap: 8% !important;
+  gap: 4% !important;
   width: 100% !important;
+  padding: 60px 5.25% !important;
   box-sizing: border-box !important;
-  padding: 70px 5.25% !important;
   background: #f3f2ef;
   color: #111;
 }
 
 .ride-showcase-image {
   width: 100% !important;
-  height:  min(42vw, 560px) !important;
-  min-height: 400px !important;
-  overflow: hidden;
+  height: 556px !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
 }
 
 .ride-showcase-image img {
@@ -592,14 +592,14 @@
   width: 100% !important;
   height: 100% !important;
   max-width: 100% !important;
-  object-fit: contain !important;
+  object-fit: cover !important;
   object-position: center !important;
 }
 
 .ride-showcase-content {
   width: 100% !important;
+  max-width: 600px !important;
   min-width: 0 !important;
-  max-width: 560px;
 }
 
 .ride-showcase-content .section-kicker {
@@ -610,11 +610,11 @@
 }
 
 .ride-showcase-content h2 {
-  margin: 32px 0 28px;
+  margin: 30px 0 !important;
   font-family: var(--display);
-  font-size: clamp(44px, 4.5vw, 72px);
+  font-size: clamp(60px, 5.6vw, 84px) !important;
   font-weight: 800;
-  line-height: 0.92;
+  line-height: 0.92 !important;
   letter-spacing: -1px;
 }
 
@@ -648,9 +648,7 @@
   font-size: 18px;
 }
 
-/* MOBILE LAYOUT */
-
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .ride-showcase {
     grid-template-columns: 1fr !important;
     gap: 30px !important;
@@ -658,74 +656,11 @@
   }
 
   .ride-showcase-image {
-    height: 350px !important;
-    min-height: 0 !important;
+    height: auto !important;
+    aspect-ratio: 1.23 / 1;
   }
 
   .ride-showcase-content h2 {
-    font-size: clamp(42px, 10vw, 60px);
-  }
-}
-/* FINAL FIX - NOT JUST ANOTHER RIDE */
-
-.ride-showcase {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) !important;
-  align-items: center !important;
-  gap: 5% !important;
-  padding: 60px 5.25% !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-.ride-showcase-image {
-  width: 100% !important;
-  height: auto !important;
-  aspect-ratio: 1.23 / 1 !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-}
-
-.ride-showcase-image img {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  object-fit: contain !important;
-  object-position: center !important;
-}
-
-.ride-showcase-content {
-  width: 100% !important;
-  max-width: 560px !important;
-  min-width: 0 !important;
-}
-
-.ride-showcase-content h2 {
-  font-size: clamp(58px, 5.5vw, 84px) !important;
-  line-height: 0.92 !important;
-  margin: 28px 0 !important;
-  letter-spacing: -1px !important;
-}
-
-.ride-showcase-content > p {
-  max-width: 420px !important;
-  font-size: 13px !important;
-  line-height: 1.9 !important;
-}
-
-@media (max-width: 700px) {
-  .ride-showcase {
-    grid-template-columns: minmax(0, 1fr) !important;
-    gap: 28px !important;
-    padding: 40px 5% !important;
-  }
-
-  .ride-showcase-image {
-    aspect-ratio: 1 / 1 !important;
-  }
-
-  .ride-showcase-content h2 {
-    font-size: clamp(42px, 10vw, 60px) !important;
+    font-size: clamp(44px, 10vw, 65px) !important;
   }
 }
