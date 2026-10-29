@@ -745,3 +745,11 @@
     }
 }
 ```
+```css
+/* Move the collection label slightly down */
+#shop .section-label,
+#shop .eyebrow,
+#shop .section-kicker {
+    margin-top: 12px !important;
+}
+```
