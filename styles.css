@@ -689,7 +689,6 @@
 @media(max-width:380px){.about-hero-features{grid-template-columns:1fr;gap:18px}.about-hero-feature,.about-hero-feature:first-child,.about-hero-feature:last-child{padding:0 0 15px;border-right:0;border-bottom:1px solid #e5e5e5}.about-hero-feature:last-child{border-bottom:0}.about-hero-feature h3,.about-hero-feature p{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.about-hero-visual img,.about-hero-button{transition:none!important}}
 
-```css
 /* DBP CUSTOMS ABOUT SECTION — IMAGE LEFT, SLIGHTLY SMALLER */
 
 .about-hero-section {
@@ -744,11 +743,16 @@
         max-width: 100% !important;
     }
 }
-```
-```css
+
 /* Move "02 / THE COLLECTION" slightly down */
 #shop .shop-heading .section-kicker {
     position: relative !important;
     top: 12px !important;
 }
-```
+#shop .shop-heading > div > .section-kicker {
+    display: block !important;
+    position: relative !important;
+    top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
