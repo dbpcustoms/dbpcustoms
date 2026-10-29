@@ -572,3 +572,195 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("DBP car customizer initialized successfully.");
 });
+
+/* ==========================================
+   DBP CUSTOMS — CINEMATIC CUSTOMIZER LOGIC
+   Add after the existing customizer JavaScript
+   ========================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+  const garage = document.getElementById("dbpCustomizer");
+  if (!garage || garage.dataset.cinematicInitialized === "true") return;
+
+  garage.dataset.cinematicInitialized = "true";
+
+  const scene = document.getElementById("dbpGarageScene");
+  const plateInput = document.getElementById("dbpPlateInput");
+  const glowButton = document.getElementById("dbpGlowToggle");
+  const lightsButton = document.getElementById("dbpLightsToggle");
+  const resetButton = document.getElementById("dbpReset");
+
+  const percentText = document.getElementById("dbpBuildPercent");
+  const progressFill = document.getElementById("dbpProgressFill");
+  const paintStat = document.getElementById("dbpStatPaint");
+  const wheelsStat = document.getElementById("dbpStatWheels");
+  const neonStat = document.getElementById("dbpStatNeon");
+  const lightsStat = document.getElementById("dbpStatLights");
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  function animateClass(element, className, duration) {
+    if (!element || reducedMotion) return;
+
+    element.classList.remove(className);
+
+    // Restart the CSS animation.
+    void element.offsetWidth;
+
+    element.classList.add(className);
+
+    window.setTimeout(function () {
+      element.classList.remove(className);
+    }, duration);
+  }
+
+  function getSelectedPaint() {
+    const selected = garage.querySelector(".dbp-paint.active");
+    return selected ? selected.dataset.color : "#c7c7c7";
+  }
+
+  function getPaintName(color) {
+    const names = {
+      "#c7c7c7": "SILVER",
+      "#ffffff": "WHITE",
+      "#080808": "BLACK",
+      "#e51f38": "RED",
+      "#164b9b": "BLUE",
+      "#16834a": "GREEN",
+      "#d6a62e": "GOLD",
+      "#7c7c7c": "GREY"
+    };
+
+    return names[String(color).toLowerCase()] || "CUSTOM";
+  }
+
+  function updateStat(element, value) {
+    if (!element) return;
+
+    if (element.textContent !== value) {
+      element.textContent = value;
+      element.classList.remove("dbp-stat-updated");
+      void element.offsetWidth;
+      element.classList.add("dbp-stat-updated");
+
+      window.setTimeout(function () {
+        element.classList.remove("dbp-stat-updated");
+      }, 650);
+    }
+  }
+
+  function updateBuildStats() {
+    const paint = getSelectedPaint();
+    const wheelButton = garage.querySelector(
+      ".dbp-option[data-wheel].active"
+    );
+
+    const wheel = wheelButton
+      ? wheelButton.dataset.wheel.toUpperCase()
+      : (garage.dataset.wheel || "sport").toUpperCase();
+
+    const neonOn = garage.classList.contains("dbp-glow-on");
+    const lightsOn = !!(
+      scene && scene.classList.contains("dbp-lights-on")
+    );
+
+    if (paintStat) updateStat(paintStat, getPaintName(paint));
+    if (wheelsStat) updateStat(wheelsStat, wheel);
+    if (neonStat) updateStat(neonStat, neonOn ? "ON" : "OFF");
+    if (lightsStat) updateStat(lightsStat, lightsOn ? "ON" : "OFF");
+
+    // Four base elements: paint, wheels, neon, and lighting.
+    // Number plate customization adds a fifth element.
+    let completed = 2;
+    if (neonOn) completed++;
+    if (lightsOn) completed++;
+
+    if (plateInput && plateInput.value.trim()) completed++;
+
+    const total = 5;
+    const percentage = Math.round((completed / total) * 100);
+
+    if (percentText) {
+      percentText.textContent = percentage + "% COMPLETE";
+    }
+
+    if (progressFill) {
+      progressFill.style.width = percentage + "%";
+    }
+  }
+
+  // Cinematic first appearance.
+  requestAnimationFrame(function () {
+    garage.classList.add("dbp-starting");
+
+    window.setTimeout(function () {
+      garage.classList.remove("dbp-starting");
+      garage.classList.add("dbp-cinematic-ready");
+    }, reducedMotion ? 0 : 1300);
+  });
+
+  // Sweep overhead lighting when the lights turn on.
+  if (lightsButton && scene) {
+    lightsButton.addEventListener("click", function () {
+      window.setTimeout(function () {
+        if (scene.classList.contains("dbp-lights-on")) {
+          animateClass(scene, "dbp-beam-active", 1350);
+        }
+        updateBuildStats();
+      }, 0);
+    });
+  }
+
+  // Extra glow transition and statistics.
+  if (glowButton) {
+    glowButton.addEventListener("click", function () {
+      window.setTimeout(updateBuildStats, 0);
+    });
+  }
+
+  // Paint transition and glossy sweep.
+  garage.querySelectorAll(".dbp-paint").forEach(function (button) {
+    button.addEventListener("click", function () {
+      animateClass(garage, "dbp-paint-changing", 650);
+
+      if (scene) {
+        animateClass(scene, "dbp-paint-sweep", 1100);
+      }
+
+      window.setTimeout(updateBuildStats, 0);
+    });
+  });
+
+  // Wheel selection flash.
+  garage.querySelectorAll(".dbp-option[data-wheel]").forEach(
+    function (button) {
+      button.addEventListener("click", function () {
+        animateClass(garage, "dbp-wheel-changing", 600);
+        window.setTimeout(updateBuildStats, 0);
+      });
+    }
+  );
+
+  // Keep statistics updated while editing the number plate.
+  if (plateInput) {
+    plateInput.addEventListener("input", updateBuildStats);
+  }
+
+  // Reset animation. Existing reset code still handles the actual values.
+  if (resetButton) {
+    resetButton.addEventListener("click", function () {
+      if (scene) {
+        animateClass(scene, "dbp-beam-active", 1350);
+      }
+
+      window.setTimeout(updateBuildStats, 50);
+    });
+  }
+
+  updateBuildStats();
+
+  console.log("DBP cinematic upgrade initialized.");
+});
+
