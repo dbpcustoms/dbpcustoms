@@ -647,14 +647,11 @@ if (!hasMouse) {
 }
 ```
 
-/* =========================================
-   DBP CUSTOMS — CAR CUSTOMIZER INTERACTIONS
-   ========================================= */
 
-(() => {
+document.addEventListener("DOMContentLoaded", function () {
     const garage = document.getElementById("dbpCustomizer");
-    if (!garage || garage.dataset.initialized === "true") return;
 
+    if (!garage || garage.dataset.initialized === "true") return;
     garage.dataset.initialized = "true";
 
     const scene = document.getElementById("dbpGarageScene");
@@ -663,98 +660,100 @@ if (!hasMouse) {
     const status = document.getElementById("dbpSceneStatus");
     const glowButton = document.getElementById("dbpGlowToggle");
     const lightsButton = document.getElementById("dbpLightsToggle");
-    const resetButton = document.getElementById("dbpReset");
 
-    const defaultColor = "#c7c7c7";
-    const defaultPlate = "DBP 0575";
-
-    function setStatus(message) {
-        status.textContent = message;
+    function updateStatus(message) {
+        if (status) status.textContent = message;
     }
 
-    // 1. Change the car's paint colour.
-    garage.querySelectorAll(".dbp-paint").forEach((button) => {
-        button.addEventListener("click", () => {
-            const color = button.dataset.color;
+    // PAINT COLOURS
+    garage.querySelectorAll(".dbp-paint").forEach(function (button) {
+        button.addEventListener("click", function () {
+            garage.style.setProperty("--dbp-car-color", button.dataset.color);
 
-            garage.style.setProperty("--dbp-car-color", color);
-
-            garage.querySelectorAll(".dbp-paint").forEach((paint) => {
-                const active = paint === button;
-                paint.classList.toggle("active", active);
-                paint.setAttribute("aria-pressed", String(active));
+            garage.querySelectorAll(".dbp-paint").forEach(function (item) {
+                const selected = item === button;
+                item.classList.toggle("active", selected);
+                item.setAttribute("aria-pressed", String(selected));
             });
 
-            setStatus("PAINT UPDATED");
+            updateStatus("PAINT UPDATED");
         });
     });
 
-    // 2. Switch wheel styles.
-    garage.querySelectorAll("[data-wheel]").forEach((button) => {
-        button.addEventListener("click", () => {
-            const wheel = button.dataset.wheel;
+    // WHEEL STYLES
+    garage.querySelectorAll(".dbp-option[data-wheel]").forEach(function (button) {
+        button.addEventListener("click", function () {
+            garage.dataset.wheel = button.dataset.wheel;
 
-            garage.dataset.wheel = wheel;
-
-            garage.querySelectorAll("[data-wheel]").forEach((option) => {
-                const active = option === button;
-                option.classList.toggle("active", active);
-                option.setAttribute("aria-pressed", String(active));
+            garage.querySelectorAll(".dbp-option[data-wheel]").forEach(function (item) {
+                const selected = item === button;
+                item.classList.toggle("active", selected);
+                item.setAttribute("aria-pressed", String(selected));
             });
 
-            setStatus("WHEELS UPDATED");
+            updateStatus("WHEELS: " + button.dataset.wheel.toUpperCase());
         });
     });
 
-    // 3. Update the number plate while typing.
-    plateInput.addEventListener("input", () => {
-        const text = plateInput.value.trim().slice(0, 10);
-        svgPlate.textContent = text || "DBP";
-        setStatus("PLATE UPDATED");
-    });
-
-    // 4. Toggle neon underglow.
-    glowButton.addEventListener("click", () => {
-        const enabled = garage.classList.toggle("dbp-glow-on");
-
-        glowButton.setAttribute("aria-pressed", String(enabled));
-        setStatus(enabled ? "NEON ACTIVATED" : "NEON OFF");
-    });
-
-    // 5. Toggle cinematic garage lighting.
-    lightsButton.addEventListener("click", () => {
-        const enabled = scene.classList.toggle("dbp-lights-on");
-
-        lightsButton.setAttribute("aria-pressed", String(enabled));
-        setStatus(enabled ? "GARAGE LIGHTS ON" : "LIGHTS READY");
-    });
-
-    // 6. Reset all settings to their defaults.
-    resetButton.addEventListener("click", () => {
-        garage.style.setProperty("--dbp-car-color", defaultColor);
-        garage.dataset.wheel = "sport";
-
-        garage.classList.remove("dbp-glow-on");
-        scene.classList.remove("dbp-lights-on");
-
-        plateInput.value = defaultPlate;
-        svgPlate.textContent = "0575";
-
-        garage.querySelectorAll(".dbp-paint").forEach((button) => {
-            const active = button.dataset.color === defaultColor;
-            button.classList.toggle("active", active);
-            button.setAttribute("aria-pressed", String(active));
+    // NUMBER PLATE
+    if (plateInput && svgPlate) {
+        plateInput.addEventListener("input", function () {
+            const value = plateInput.value.trim().slice(0, 10);
+            svgPlate.textContent = value || "DBP";
+            updateStatus("PLATE UPDATED");
         });
+    }
 
-        garage.querySelectorAll("[data-wheel]").forEach((button) => {
-            const active = button.dataset.wheel === "sport";
-            button.classList.toggle("active", active);
-            button.setAttribute("aria-pressed", String(active));
+    // NEON UNDERGLOW
+    if (glowButton) {
+        glowButton.addEventListener("click", function () {
+            const enabled = garage.classList.toggle("dbp-glow-on");
+            glowButton.setAttribute("aria-pressed", String(enabled));
+            updateStatus(enabled ? "NEON ACTIVATED" : "NEON OFF");
         });
+    }
 
-        glowButton.setAttribute("aria-pressed", "false");
-        lightsButton.setAttribute("aria-pressed", "false");
+    // GARAGE LIGHTING
+    if (lightsButton && scene) {
+        lightsButton.addEventListener("click", function () {
+            const enabled = scene.classList.toggle("dbp-lights-on");
+            lightsButton.setAttribute("aria-pressed", String(enabled));
+            updateStatus(enabled ? "GARAGE LIGHTS ON" : "LIGHTS READY");
+        });
+    }
 
-        setStatus("BUILD RESET");
-    });
-})();
+    // RESET
+    const resetButton = document.getElementById("dbpReset");
+
+    if (resetButton) {
+        resetButton.addEventListener("click", function () {
+            garage.style.setProperty("--dbp-car-color", "#c7c7c7");
+            garage.dataset.wheel = "sport";
+            garage.classList.remove("dbp-glow-on");
+
+            if (scene) scene.classList.remove("dbp-lights-on");
+
+            if (plateInput) plateInput.value = "DBP 0575";
+            if (svgPlate) svgPlate.textContent = "0575";
+
+            garage.querySelectorAll(".dbp-paint").forEach(function (button) {
+                const selected = button.dataset.color === "#c7c7c7";
+                button.classList.toggle("active", selected);
+                button.setAttribute("aria-pressed", String(selected));
+            });
+
+            garage.querySelectorAll(".dbp-option[data-wheel]").forEach(function (button) {
+                const selected = button.dataset.wheel === "sport";
+                button.classList.toggle("active", selected);
+                button.setAttribute("aria-pressed", String(selected));
+            });
+
+            if (glowButton) glowButton.setAttribute("aria-pressed", "false");
+            if (lightsButton) lightsButton.setAttribute("aria-pressed", "false");
+
+            updateStatus("BUILD RESET");
+        });
+    }
+
+    console.log("DBP car customizer initialized successfully.");
+});
