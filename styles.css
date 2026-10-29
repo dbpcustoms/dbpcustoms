@@ -1457,6 +1457,316 @@
         transition: none !important;
     }
 }
-```
+
+/* ==========================================
+   DBP CUSTOMS — CINEMATIC LUXURY UPGRADE
+   ========================================== */
+
+.dbp-customizer {
+  --dbp-neon-color: #e51f38;
+  position: relative;
+  isolation: isolate;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .18);
+  transition: border-color .4s ease, box-shadow .4s ease;
+}
+
+.dbp-customizer.dbp-cinematic-ready {
+  border-color: #45464a;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, .25);
+}
+
+/* Cinematic entrance */
+.dbp-customizer.dbp-starting .dbp-garage-top,
+.dbp-customizer.dbp-starting .dbp-garage-scene,
+.dbp-customizer.dbp-starting .dbp-customizer-controls,
+.dbp-customizer.dbp-starting .dbp-garage-footer {
+  animation: dbpLuxuryEntrance .85s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.dbp-customizer.dbp-starting .dbp-garage-scene {
+  animation-delay: .12s;
+}
+
+.dbp-customizer.dbp-starting .dbp-customizer-controls {
+  animation-delay: .22s;
+}
+
+.dbp-customizer.dbp-starting .dbp-garage-footer {
+  animation-delay: .3s;
+}
+
+@keyframes dbpLuxuryEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: brightness(.65);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+}
+
+/* Sweeping overhead light */
+.dbp-garage-scene::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: -30%;
+  bottom: -30%;
+  left: -65%;
+  width: 32%;
+  pointer-events: none;
+  opacity: 0;
+  transform: skewX(-18deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, .04) 20%,
+    rgba(255, 255, 255, .20) 50%,
+    rgba(255, 255, 255, .04) 80%,
+    transparent
+  );
+}
+
+.dbp-garage-scene.dbp-beam-active::before {
+  animation: dbpLightSweep 1.25s ease-in-out;
+}
+
+@keyframes dbpLightSweep {
+  0% { left: -65%; opacity: 0; }
+  20% { opacity: .9; }
+  80% { opacity: .75; }
+  100% { left: 135%; opacity: 0; }
+}
+
+/* Garage light activation */
+.dbp-garage-scene,
+.dbp-garage-light {
+  transition: background .7s ease, opacity .7s ease;
+}
+
+.dbp-garage-scene.dbp-lights-on {
+  background:
+    radial-gradient(ellipse at 50% 40%,
+      rgba(190, 193, 199, .30),
+      rgba(54, 56, 60, .65) 40%,
+      #080909 85%);
+}
+
+.dbp-lights-on .dbp-garage-light {
+  opacity: .8;
+  filter: blur(20px);
+}
+
+/* Smooth paint transitions */
+.dbp-car-svg #dbpBodyGradient stop:nth-child(2) {
+  stop-color: var(--dbp-car-color);
+  transition: stop-color .55s ease;
+}
+
+.dbp-car-svg {
+  transition: filter .4s ease;
+}
+
+.dbp-customizer.dbp-paint-changing .dbp-car-svg {
+  filter:
+    drop-shadow(0 12px 15px #0009)
+    brightness(1.14);
+}
+
+/* Simulated glossy reflection sweep */
+.dbp-garage-scene.dbp-paint-sweep::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 15%;
+  bottom: 22%;
+  left: -45%;
+  width: 24%;
+  pointer-events: none;
+  transform: skewX(-20deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, .16),
+    rgba(255, 255, 255, .42),
+    rgba(255, 255, 255, .10),
+    transparent
+  );
+  animation: dbpPaintReflection 1.05s ease-in-out;
+}
+
+@keyframes dbpPaintReflection {
+  0% { left: -45%; opacity: 0; }
+  20% { opacity: .9; }
+  100% { left: 125%; opacity: 0; }
+}
+
+/* Wheel selection highlight */
+.dbp-customizer.dbp-wheel-changing .dbp-car-svg {
+  animation:
+    dbpCarIdle 3.5s ease-in-out infinite,
+    dbpWheelFlash .55s ease-out;
+}
+
+@keyframes dbpWheelFlash {
+  0% { filter: drop-shadow(0 12px 15px #0009) brightness(1.35); }
+  100% { filter: drop-shadow(0 12px 15px #0009) brightness(1); }
+}
+
+/* Richer neon underglow */
+.dbp-car-underglow {
+  background: var(--dbp-neon-color);
+  box-shadow: 0 0 24px var(--dbp-neon-color);
+  filter: blur(17px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.dbp-customizer.dbp-glow-on .dbp-car-underglow {
+  opacity: .95;
+  transform: scaleX(1.2);
+  animation: dbpGlowPulse 2.2s ease-in-out infinite;
+}
+
+.dbp-customizer.dbp-glow-on .dbp-garage-scene {
+  box-shadow: inset 0 -22px 50px
+    color-mix(in srgb, var(--dbp-neon-color) 15%, transparent);
+}
+
+/* Live build stats */
+.dbp-build-stats {
+  margin: 0 16px 17px;
+  padding: 14px;
+  border: 1px solid #2b2c2f;
+  background: linear-gradient(135deg, #151618, #0c0d0e);
+}
+
+.dbp-stats-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: #a4a5a8;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+#dbpBuildPercent {
+  color: #f0f0f0;
+  text-align: right;
+}
+
+.dbp-progress-track {
+  height: 3px;
+  overflow: hidden;
+  background: #303135;
+}
+
+.dbp-progress-fill {
+  width: 20%;
+  height: 100%;
+  background: #e51f38;
+  box-shadow: 0 0 10px #e51f3870;
+  transition: width .55s cubic-bezier(.2, .7, .2, 1);
+}
+
+.dbp-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.dbp-stat {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dbp-stat span {
+  color: #77797e;
+  font-size: 7px;
+  letter-spacing: .8px;
+}
+
+.dbp-stat strong {
+  overflow: hidden;
+  color: #ededee;
+  font-size: 9px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color .25s ease;
+}
+
+.dbp-stat strong.dbp-stat-updated {
+  color: #ff687a;
+}
+
+/* Premium button response */
+.dbp-paint,
+.dbp-option,
+.dbp-toggle,
+.dbp-reset-button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dbp-option.active {
+  box-shadow: 0 0 13px rgba(229, 31, 56, .12);
+}
+
+.dbp-toggle[aria-pressed="true"] {
+  box-shadow: inset 0 0 15px rgba(229, 31, 56, .08);
+}
+
+.dbp-reset-button:active,
+.dbp-toggle:active,
+.dbp-option:active {
+  transform: scale(.98);
+}
+
+/* Keep the new statistics responsive */
+@media (max-width: 768px) {
+  .dbp-build-stats {
+    margin: 0 12px 15px;
+    padding: 12px;
+  }
+
+  .dbp-stats-grid {
+    gap: 7px;
+  }
+
+  .dbp-stat span {
+    font-size: 6px;
+    letter-spacing: .5px;
+  }
+
+  .dbp-stat strong {
+    font-size: 8px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .dbp-customizer.dbp-starting .dbp-garage-top,
+  .dbp-customizer.dbp-starting .dbp-garage-scene,
+  .dbp-customizer.dbp-starting .dbp-customizer-controls,
+  .dbp-customizer.dbp-starting .dbp-garage-footer,
+  .dbp-garage-scene.dbp-beam-active::before,
+  .dbp-garage-scene.dbp-paint-sweep::after {
+    animation: none !important;
+  }
+
+  .dbp-build-stats *,
+  .dbp-customizer * {
+    scroll-behavior: auto;
+  }
+}
+
 
 
