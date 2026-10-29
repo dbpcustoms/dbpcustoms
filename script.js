@@ -646,3 +646,115 @@ if (!hasMouse) {
     }
 }
 ```
+
+/* =========================================
+   DBP CUSTOMS — CAR CUSTOMIZER INTERACTIONS
+   ========================================= */
+
+(() => {
+    const garage = document.getElementById("dbpCustomizer");
+    if (!garage || garage.dataset.initialized === "true") return;
+
+    garage.dataset.initialized = "true";
+
+    const scene = document.getElementById("dbpGarageScene");
+    const plateInput = document.getElementById("dbpPlateInput");
+    const svgPlate = document.getElementById("dbpSvgPlate");
+    const status = document.getElementById("dbpSceneStatus");
+    const glowButton = document.getElementById("dbpGlowToggle");
+    const lightsButton = document.getElementById("dbpLightsToggle");
+    const resetButton = document.getElementById("dbpReset");
+
+    const defaultColor = "#c7c7c7";
+    const defaultPlate = "DBP 0575";
+
+    function setStatus(message) {
+        status.textContent = message;
+    }
+
+    // 1. Change the car's paint colour.
+    garage.querySelectorAll(".dbp-paint").forEach((button) => {
+        button.addEventListener("click", () => {
+            const color = button.dataset.color;
+
+            garage.style.setProperty("--dbp-car-color", color);
+
+            garage.querySelectorAll(".dbp-paint").forEach((paint) => {
+                const active = paint === button;
+                paint.classList.toggle("active", active);
+                paint.setAttribute("aria-pressed", String(active));
+            });
+
+            setStatus("PAINT UPDATED");
+        });
+    });
+
+    // 2. Switch wheel styles.
+    garage.querySelectorAll("[data-wheel]").forEach((button) => {
+        button.addEventListener("click", () => {
+            const wheel = button.dataset.wheel;
+
+            garage.dataset.wheel = wheel;
+
+            garage.querySelectorAll("[data-wheel]").forEach((option) => {
+                const active = option === button;
+                option.classList.toggle("active", active);
+                option.setAttribute("aria-pressed", String(active));
+            });
+
+            setStatus("WHEELS UPDATED");
+        });
+    });
+
+    // 3. Update the number plate while typing.
+    plateInput.addEventListener("input", () => {
+        const text = plateInput.value.trim().slice(0, 10);
+        svgPlate.textContent = text || "DBP";
+        setStatus("PLATE UPDATED");
+    });
+
+    // 4. Toggle neon underglow.
+    glowButton.addEventListener("click", () => {
+        const enabled = garage.classList.toggle("dbp-glow-on");
+
+        glowButton.setAttribute("aria-pressed", String(enabled));
+        setStatus(enabled ? "NEON ACTIVATED" : "NEON OFF");
+    });
+
+    // 5. Toggle cinematic garage lighting.
+    lightsButton.addEventListener("click", () => {
+        const enabled = scene.classList.toggle("dbp-lights-on");
+
+        lightsButton.setAttribute("aria-pressed", String(enabled));
+        setStatus(enabled ? "GARAGE LIGHTS ON" : "LIGHTS READY");
+    });
+
+    // 6. Reset all settings to their defaults.
+    resetButton.addEventListener("click", () => {
+        garage.style.setProperty("--dbp-car-color", defaultColor);
+        garage.dataset.wheel = "sport";
+
+        garage.classList.remove("dbp-glow-on");
+        scene.classList.remove("dbp-lights-on");
+
+        plateInput.value = defaultPlate;
+        svgPlate.textContent = "0575";
+
+        garage.querySelectorAll(".dbp-paint").forEach((button) => {
+            const active = button.dataset.color === defaultColor;
+            button.classList.toggle("active", active);
+            button.setAttribute("aria-pressed", String(active));
+        });
+
+        garage.querySelectorAll("[data-wheel]").forEach((button) => {
+            const active = button.dataset.wheel === "sport";
+            button.classList.toggle("active", active);
+            button.setAttribute("aria-pressed", String(active));
+        });
+
+        glowButton.setAttribute("aria-pressed", "false");
+        lightsButton.setAttribute("aria-pressed", "false");
+
+        setStatus("BUILD RESET");
+    });
+})();
