@@ -704,12 +704,27 @@
     justify-self: start !important;
 }
 
-.about-hero-visual img {
+.about-hero-visual {
+    position: relative !important;
     width: 100% !important;
+    max-width: 520px !important;
     height: 400px !important;
-    object-fit: cover !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    justify-self: start !important;
+    clip-path: none !important;
+    background: transparent !important;
+}
+
+.about-hero-visual img {
     display: block !important;
-    border-radius: 12px;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 0 !important;
+}
+
 }
 
 .about-hero-copy {
@@ -731,9 +746,15 @@
         gap: 24px !important;
     }
 
-    .about-hero-visual {
-        max-width: 100% !important;
-    }
+.about-hero-visual {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 300px !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    clip-path: none !important;
+}
 
     .about-hero-visual img {
         height: 300px !important;
