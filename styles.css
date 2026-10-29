@@ -747,26 +747,33 @@
     }
 
 .about-hero-visual {
+    position: relative !important;
     width: 100% !important;
-    max-width: 100% !important;
-    height: 300px !important;
+    max-width: 600px !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
     min-height: 0 !important;
-    aspect-ratio: auto !important;
     overflow: hidden !important;
+    justify-self: start !important;
     clip-path: none !important;
+    background: #111 !important;
 }
+
 .about-hero-video {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
-    border: none;
-    border-radius: 0;
 }
-    .about-hero-visual img {
-        height: 300px !important;
-    }
+
+.about-hero-visual {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 16 / 9;
+    height: auto !important;
+}
+
 
     .about-hero-copy {
         max-width: 100% !important;
