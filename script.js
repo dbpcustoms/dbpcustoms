@@ -1,17 +1,83 @@
 const WHATSAPP_NUMBER = "919592400575";
 const products = {
-  stickers: { name: "Premium Matte Vinyl Stickers", price: 48, image: "sticker-collection.png", category: "Stickers" },
-  gel: { name: "Premium Gel Decals", price: 100, image: "premium-gel-decals.png", category: "Stickers" },
-  pcr: { name: "PCR Light", price: 250, image: "pcr-light.png", category: "Accessories" },
-  fixAntenna: { name: "Fix Antenna", price: 950, image: "fix-antenna.png", category: "Accessories" },
-  antenna: { name: "Magnetic Car Antenna", price: 1050, image: "magnetic-antenna.png", category: "Accessories" },
-  ak47: { name: "AK47 Car Hanging", price: 210, image: "ak47-car-hanging.png", category: "Accessories" },
-  jersey: { name: "Customized Car Hanging", price: 250, image: "custom-jersey-keychain.png", category: "Accessories" },
-  taiwanAntenna: { name: "Magnetic Antenna (Made in Taiwan, 4.6 FT)", price: 2750, image: "magnetic-antenna-taiwan.png", category: "Accessories" },
-  slimPlate: { name: "Slim Font Plate (Pair)", price: 1420, image: "slim-font-plate.png", category: "Accessories" },
-  hsrpPlate: { name: "HSRP Style Plate (Pair)", price: 1420, image: "hsrp-style-plate.png", category: "Accessories" }
-    metalKeychain: { name: "Metal Keychain", price: 490, image: "metal-keychain.png", category: "Accessories" },
-  heavyMetalLogos: { name: "Heavy Quality Metal Logos", price: 950, image: "heavy-metal-logos.png", category: "Accessories" }
+  stickers: {
+    name: "Premium Matte Vinyl Stickers",
+    price: 48,
+    image: "sticker-collection.png",
+    category: "Stickers"
+  },
+  gel: {
+    name: "Premium Gel Decals",
+    price: 100,
+    image: "premium-gel-decals.png",
+    category: "Stickers"
+  },
+  pcr: {
+    name: "PCR Light",
+    price: 899,
+    image: "pcr-light.png",
+    category: "Accessories"
+  },
+  fixAntenna: {
+    name: "Fix Antenna",
+    price: 950,
+    image: "fix-antenna.png",
+    category: "Accessories"
+  },
+  antenna: {
+    name: "Magnetic Car Antenna",
+    price: 1050,
+    image: "magnetic-antenna.png",
+    category: "Accessories"
+  },
+  ak47: {
+    name: "AK47 Car Hanging",
+    price: 210,
+    image: "ak47-car-hanging.png",
+    category: "Accessories"
+  },
+  jersey: {
+    name: "Customized Car Hanging",
+    price: 250,
+    image: "custom-jersey-keychain.png",
+    category: "Accessories"
+  },
+  taiwanAntenna: {
+    name: "Magnetic Antenna (Made in Taiwan, 4.6 FT)",
+    price: 2750,
+    image: "magnetic-antenna-new.png",
+    category: "Accessories"
+  },
+  slimPlate: {
+    name: "Slim Font Plate (Pair)",
+    price: 1420,
+    image: "slim-font-plate.png",
+    category: "Accessories"
+  },
+  hsrpPlate: {
+    name: "HSRP Style Plate (Pair)",
+    price: 1420,
+    image: "hsrp-style-plate.png",
+    category: "Accessories"
+  },
+  boldPlate: {
+    name: "BOLD Style Plate (Pair)",
+    price: 1420,
+    image: "bold-style-plate.png",
+    category: "Accessories"
+  },
+  metalKeychain: {
+    name: "Metal Keychain",
+    price: 490,
+    image: "metal-keychain.png",
+    category: "Accessories"
+  },
+  heavyMetalLogos: {
+    name: "Heavy Quality Metal Logos",
+    price: 950,
+    image: "heavy-metal-logos.png",
+    category: "Accessories"
+  }
 };
 let cart = [];
 let activeFilter = "all";
@@ -239,7 +305,9 @@ $("#checkoutButton").addEventListener("click", () => {
   }
   const subtotal = cart.reduce((sum, item) => sum + products[item.id].price * item.qty, 0);
   const lines = cart.map(item => `• ${products[item.id].name} × ${item.qty} — ${money(products[item.id].price * item.qty)}`);
-  const shipping = subtotal >= 3750 ? "Eligible for free shipping (order above ₹3,750)." : "Please confirm shipping charges.";
+const shipping = subtotal >= 2150
+  ? "Eligible for free shipping (order ₹2,150 or above)."
+  : "Please confirm shipping charges.";
   const message = `Hi DBP CUSTOMS! I'd like to place an order:\n\n${lines.join("\n")}\n\nSubtotal: ${money(subtotal)}\n${shipping}\n\nPlease confirm availability, delivery charges and payment/COD options.`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
 });
