@@ -78,6 +78,12 @@ const products = {
     image: "heavy-metal-logos.png",
     category: "Accessories"
   }
+    nagoyaAntenna: {
+    name: "Non Magnetic Nagoya Antenna",
+    price: 2450,
+    image: "non-magnetic-nagoya-antenna.png",
+    category: "Accessories"
+  }
 };
 let cart = [];
 let activeFilter = "all";
