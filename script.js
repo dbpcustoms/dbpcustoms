@@ -10,6 +10,8 @@ const products = {
   taiwanAntenna: { name: "Magnetic Antenna (Made in Taiwan, 4.6 FT)", price: 2750, image: "magnetic-antenna-taiwan.png", category: "Accessories" },
   slimPlate: { name: "Slim Font Plate (Pair)", price: 1420, image: "slim-font-plate.png", category: "Accessories" },
   hsrpPlate: { name: "HSRP Style Plate (Pair)", price: 1420, image: "hsrp-style-plate.png", category: "Accessories" }
+    metalKeychain: { name: "Metal Keychain", price: 490, image: "metal-keychain.png", category: "Accessories" },
+  heavyMetalLogos: { name: "Heavy Quality Metal Logos", price: 950, image: "heavy-metal-logos.png", category: "Accessories" }
 };
 let cart = [];
 let activeFilter = "all";
