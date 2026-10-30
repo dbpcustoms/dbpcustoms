@@ -72,13 +72,13 @@ const products = {
     image: "metal-keychain.png",
     category: "Accessories"
   },
-  heavyMetalLogos: {
+   heavyMetalLogos: {
     name: "Heavy Quality Metal Logos",
     price: 950,
     image: "heavy-metal-logos.png",
     category: "Accessories"
-  }
-    nagoyaAntenna: {
+  },
+  nagoyaAntenna: {
     name: "Non Magnetic Nagoya Antenna",
     price: 2450,
     image: "non-magnetic-nagoya-antenna.png",
